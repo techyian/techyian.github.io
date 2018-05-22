@@ -155,7 +155,7 @@ img {
 
 @media only screen and (min-width: 768px) {
   .navbar-custom {
-    padding: 20px 0;
+    padding: 10px 0;
     -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
     -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
     transition: background .5s ease-in-out,padding .5s ease-in-out;
@@ -772,3 +772,14 @@ td.gutter {
   font-style: italic;
   font-size: 16px;
 }
+
+
+/* Personal overrides */
+.navbar-header h1 {
+	display: inline;
+}
+
+footer .theme-by a {
+	color: #f5f5f5;
+}
+
