@@ -166,7 +166,7 @@ defaults:
       path: ""
       type: my_categories
     values:
-      layout: blog_by_category
+      layout: category
 
 # Use tags index page and make tags on each post clickable
 link-tags: true
