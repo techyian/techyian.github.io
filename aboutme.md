@@ -1,16 +1,13 @@
 ---
 layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
+subtitle: All you need to know about Ian Auty.
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+Hi, I'm Ian. I currently work as a C# programmer for Tribal Group in the UK. In my spare time, as well as spending time with my family, I enjoy contributing to Open Source software,
+photography and trying my dab hand at making things (usually out of plastic - it's a bit more forgiving). I especially like working with the Raspberry Pi computer and its camera module;
+over at my Github repo you'll find [MMALSharp](https://github.com/techyian/MMALSharp) which is a C# API for the camera module. My photography skills are somewhat developing; 
+I own a Fujifilm Finepix S4800, and have also made my own camera that I like to call the SwitchCam - it was made from an old network switch and a dummy CCTV unit and is powered by
+a Raspberry Pi Zero and 8MP camera module.
 
-- I rock a great mustache
-- I'm extremely loyal to my family
-
-What else do you need?
-
-### my history
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](http://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+If you'd like to follow or contact me I'm on Twitter with the handle @techyian.
