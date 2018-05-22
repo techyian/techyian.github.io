@@ -160,6 +160,13 @@ defaults:
     values:
       layout: "page"
       show-avatar: true
+      
+  -
+    scope:
+      path: ""
+      type: my_categories
+    values:
+      layout: blog_by_category
 
 # Use tags index page and make tags on each post clickable
 link-tags: true
@@ -230,6 +237,13 @@ prose:
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
 
+collections:
+  my_categories:
+    output: true
+    permalink: /category/:name/
+  
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189
