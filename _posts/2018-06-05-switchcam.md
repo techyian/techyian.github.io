@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Making of the SwitchCam
-image: /img/switchcam.jpg
+image: /img/switchcam-avatar.jpg
 category: making
 tags: [making, diy]
 ---
