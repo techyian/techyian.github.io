@@ -1,12 +1,10 @@
 ---
 layout: post
-title: Making test
-image: /img/making/switchcam.jpeg
+title: Making of the SwitchCam
+image: /img/switchcam.jpeg
 category: making
 tags: [making, diy]
 ---
-
-# Making of the SwitchCam
 
 ## Introduction
 
