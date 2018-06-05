@@ -111,8 +111,16 @@ Well this is it, we've set up everything we need for the SwitchCam project. Cong
 
 To complete the project, you need to assemble any parts that are still left, it's a bit of a squeeze but it does all fit, I promise!
 
+You'll also notice there's an open space next to your on/off switch that'll need filling up - I used some matrix display plastic that's used in digital LED displays but you're free to use whatever material you wish, some super glue round the edges finished off with some epoxy afterwards will do the trick nicely.
+
 ### Special thanks
 
 Huge thanks goes out to my dad for all the help he provided whilst doing this project. He helped keep me on track and offered a lot of assistance on areas I wasn't as strong in (soldering - it's a dark art!). 
 
+### Gallery
 
+<img style="float: left; max-width: 33.33%;" src="/img/switchcam.jpg">
+
+<img style="float: left; max-width: 33.33%;" src="/img/switchcam-screen-far.jpg">
+
+<img style="float: left; max-width: 33.33%;" src="/img/switchcam-screen-close.jpg">
