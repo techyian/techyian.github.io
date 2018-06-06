@@ -39,10 +39,23 @@ between them.
 15. Adafruit PiTFT Plus 3.5" (£45 - [Pimoroni](https://shop.pimoroni.com/products/pitft-plus-480x320-3-5-tft-touchscreen-for-raspberry-pi-pi-2-and-model-a-b))
 16. RS components 4.2" bezel - manually resized to 3.5" (£9.04 - [RS Components](https://uk.rs-online.com/web/p/products/8417881/))
 17. JST extension cable (£2 - [The Pi Hut](https://thepihut.com/products/adafruit-jst-ph-battery-extension-cable-500mm))
+18. Adafruit Micro LiPo charger (£6.30 - [Pimoroni](https://shop.pimoroni.com/products/adafruit-micro-lipo-w-microusb-jack-usb-liion-lipoly-charger))
 
-Total cost: approx. £152 excluding postage.
+Total cost: approx. £160 excluding postage.
+
+## Tools
+
+1. Araldite epoxy resin
+2. Soldering iron + solder
+3. Plastic spludger
+4. Kapton tape
+5. Philips screwdriver - small one also needed for removing CCTV screws
+6. Files
+7. Sandpaper of varying coarseness
 
 ## Let's get making
+
+**Note:** Make sure you've earthed yourself correctly before handling any of the ESD sensitive components in this project.
 
 ### Part 1 - Dismantle switch
 
