@@ -23,20 +23,20 @@ public async Task<IActionResult> BuildApp(string appRequestId, [FromBody] Mobile
 {	
 	var parameters = new Dictionary<string, string>
 	{
-		{ "VARIABLE_ONE", "DATA" },
-		{ "VARIABLE_TWO", "DATA" }
+	    { "VARIABLE_ONE", "DATA" },
+	    { "VARIABLE_TWO", "DATA" }
 	};
 
 	var json = JsonConvert.SerializeObject(parameters);
 
 	var appRequest = new BuildMobileAppRequest
 	{
-		// Replace '1' with your definition id.
-		Definition = new Definitition(1),
-		Parameters = json,
-		Project = new AppProject("YOUR PROJECT ID"),
-		// Replace '1' with your queue id.
-		Queue = new AppQueue(1)
+	    // Replace '1' with your definition id.
+	    Definition = new Definitition(1),
+	    Parameters = json,
+	    Project = new AppProject("YOUR PROJECT ID"),
+	    // Replace '1' with your queue id.
+	    Queue = new AppQueue(1)
 	};
 
 	// Build your app using the VSTS API
@@ -50,18 +50,18 @@ The POCOs to serialize:
 ```
 public class BuildMobileAppRequest
 {
-	public Definitition Definition { get; set; }		
-	public string Parameters { get; set; }
+    public Definitition Definition { get; set; }		
+    public string Parameters { get; set; }
 }
 
 public class Definitition
 {
-	public int Id { get; set; }
+    public int Id { get; set; }
 
-	public Definitition(int id)
-	{
-		this.Id = id;
-	}
+    public Definitition(int id)
+    {
+	this.Id = id;
+    }
 }
 ```
 
