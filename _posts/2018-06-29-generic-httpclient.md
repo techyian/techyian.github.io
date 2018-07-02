@@ -2,7 +2,7 @@
 layout: post
 title: Generic HttpClient GET and POST requests
 category: coding
-tags: [coding, c#, .net]
+tags: [coding, c#, .net, asp.net]
 ---
 
 I've been recently working on a project at work to set up Xamarin build automation for our Android and iOS apps via VSTS. I decided to use ASP.NET Core as the framework
