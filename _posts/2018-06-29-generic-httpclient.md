@@ -2,6 +2,7 @@
 layout: post
 title: Generic HttpClient GET and POST requests
 category: coding
+description: Find out how to send generic HttpClient GET and POST requests using Newtonsoft.Json
 tags: [coding, c#, .net, asp.net]
 ---
 

@@ -1,7 +1,8 @@
 ---
 layout: post
-title: VSTS Rest API - Send user defined variables when queuing build
+title: VSTS REST API - Send user defined variables when queuing build
 category: coding
+description: Learn how to send user-defined variables to VSTS REST API when queuing new builds.
 tags: [coding, c#, .net, asp.net]
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: Making of the SwitchCam
 image: /img/switchcam-avatar.jpg
 category: making
+description: The SwitchCam is a portable Raspberry Pi Zero powered Camera featuring the 8MP module built from a network switch and dummy CCTV unit. Learn how to make your own here!
 tags: [making, diy]
 ---
 
