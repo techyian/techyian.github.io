@@ -15,7 +15,7 @@ Before I knew it, I was analysing large amounts of C code, refreshing my mind on
 (can I not just use a class and forget this ever happened?) and low level memory management; it was a lot to take in at first, 
 and the first hurdle appeared when I came across this structure:
 
-```
+```csharp
 typedef struct MMAL_COMPONENT_T
 {
    // Removed irrelevant areas.
@@ -33,7 +33,7 @@ was needed and the solution can be seen below.
 
 For clarity, here is the C# equivalent struct, again all the irrelevant code has been removed:
 
-```
+```csharp
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct MMAL_COMPONENT_T
 {
@@ -55,7 +55,7 @@ public unsafe struct MMAL_COMPONENT_T
 
 Next, you need to loop around the number of pointers you will be expecting to be present, and the dereferencing is done as follows:
 
-```
+```csharp
 &(*this.Ptr->Input[i])
 ```
 
