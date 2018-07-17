@@ -15,7 +15,7 @@ method to get a list of projects for a given MSDN account, and I noticed that I 
 
 For reference, here is the original method:
 
-```
+```csharp
 public static async void GetProjects()
 {
     try
@@ -50,7 +50,7 @@ public static async void GetProjects()
 
 And the improved generic version:
 
-```
+```csharp
 private async Task<T> GetRequest<T>(string uri)
 {
     try
@@ -86,7 +86,7 @@ this is more of a general purpose method for GET requests via HttpClient.
 
 For completeness, here is a generic POST request using HttpClient:
 
-```
+```csharp
 private async Task<TOut> PostRequest<TIn, TOut>(string uri, TIn content)
 {
     try
