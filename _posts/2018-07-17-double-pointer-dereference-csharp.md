@@ -59,6 +59,6 @@ Next, you need to loop around the number of pointers you will be expecting to be
 &(*this.Ptr->Input[i])
 ```
 
-Where `this.Ptr` is an `IntPtr` to the MMAL component and its `Input` struct member is accessed at index `i`.
+Where `this.Ptr` is a `MMAL_COMPONENT_T*` pointer to the MMAL component and its `Input` struct member is accessed at index `i`.
 
 I hope that might help someone in a similar situation, and thanks for reading.
