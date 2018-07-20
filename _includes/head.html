@@ -56,6 +56,10 @@
   <meta property="fb:app_id" content="{{ site.fb_app_id }}" />
   {% endif %}
 
+  {% if site.favicon %}
+  <link rel="shortcut icon" href="{% site.url %}/{% site.favicon %}">  
+  {% endif %}
+  
   {% if page.meta-title %}
   <meta property="og:title" content="{{ page.meta-title }}" />
   {% elsif page.title %}
