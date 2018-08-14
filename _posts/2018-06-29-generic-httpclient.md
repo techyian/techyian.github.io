@@ -60,8 +60,7 @@ private async Task<T> GetRequest<T>(string uri)
 	    client.DefaultRequestHeaders.Accept.Add(
 		new MediaTypeWithQualityHeaderValue("application/json"));
 
-	    using (HttpResponseMessage response = await client.GetAsync(
-		$"{uri}"))
+	    using (HttpResponseMessage response = await client.GetAsync(uri))
 	    {
 		response.EnsureSuccessStatusCode();
 		string responseBody = await response.Content.ReadAsStringAsync();
@@ -98,8 +97,7 @@ private async Task<TOut> PostRequest<TIn, TOut>(string uri, TIn content)
 
 	    var serialized = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
 
-	    using (HttpResponseMessage response = await client.PostAsync(
-		$"{uri}", serialized))
+	    using (HttpResponseMessage response = await client.PostAsync(uri, serialized))
 	    {
 		response.EnsureSuccessStatusCode();
 		string responseBody = await response.Content.ReadAsStringAsync();
