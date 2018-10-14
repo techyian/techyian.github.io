@@ -1,6 +1,6 @@
 ---
 layout: post
-image: /img/Enemy_Territory_logo.png
+image: /img/Enemy_territory_logo.jpg
 title: Install Enemy Territory on a Raspberry Pi
 category: gaming
 description: Learn how install Enemy Territory Legacy on a Raspberry Pi.
