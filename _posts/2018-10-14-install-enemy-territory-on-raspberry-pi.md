@@ -94,8 +94,8 @@ cd ~/Downloads
 wget https://netcologne.dl.sourceforge.net/project/boost/boost/1.66.0/boost_1_66_0.tar.bz2
 tar xvjf boost_1_66_0.tar.bz2
 cd boost_1_66_0
-./bootstrap.sh
-sudo ./b2 install --prefix /usr/local/
+sudo ./bootstrap.sh --prefix=/usr/local
+sudo ./b2 install
 ```
 
 If all was successful you should now have boost installed on your Raspberry Pi. Next we need to download Omnibot:
@@ -107,6 +107,8 @@ cd omni-bot
 git submodule init
 git submodule update
 ```
+
+At this stage, please ensure that the MonkeyScript dependency (gmscriptex) has been downloaded into the `omni-bot/0.83/Omnibot/dependencies/` folder.
 
 You now need to edit some source files in order for Omnibot to compile successfully - this is the experimental part and an issue has been raised with the Omnibot devs [here](https://github.com/jswigart/omni-bot/issues/6#issuecomment-427597474). If you read this ticket you can see the lines of code which require commenting out. Next we need to edit the omni-bot install script:
 
@@ -147,6 +149,8 @@ Find the section of the file which has omni-bot related cvar settings, and uncom
 set omnibot_enable "1"
 set omnibot_path "./legacy/omni-bot"
 ```
+
+**If you want to bypass the compilation yourself, you can download the compiled binary from [here](https://techyian.github.io/downloads/omnibot_et.so).**
 
 Congratulations. If all was successful at this point, you should be able to open Enemy Territory and start a local server. You can access the referee area to set how many bots you want to enable.
 
