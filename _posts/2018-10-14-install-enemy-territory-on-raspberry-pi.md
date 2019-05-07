@@ -96,6 +96,7 @@ tar xvjf boost_1_66_0.tar.bz2
 cd boost_1_66_0
 sudo ./bootstrap.sh --prefix=/usr/local
 sudo ./b2 install
+sudo ./bjam install
 ```
 
 If all was successful you should now have boost installed on your Raspberry Pi. Next we need to download Omnibot:
