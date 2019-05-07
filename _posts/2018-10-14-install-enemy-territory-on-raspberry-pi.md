@@ -89,6 +89,8 @@ Introducing Omnibot for ARM!
 
 This is a slightly more involved process, and is certaintly experimental. In order to install Omnibot, you first need to download and compile the boost library, you can do this as follows:
 
+### Install boost and bjam
+
 ```
 cd ~/Downloads
 wget https://netcologne.dl.sourceforge.net/project/boost/boost/1.66.0/boost_1_66_0.tar.bz2
@@ -98,6 +100,8 @@ sudo ./bootstrap.sh --prefix=/usr/local
 sudo ./b2 install
 sudo ./bjam install
 ```
+
+### Download and configure omni-bot
 
 If all was successful you should now have boost installed on your Raspberry Pi. Next we need to download Omnibot:
 
@@ -134,9 +138,17 @@ $BOOST/bjam -a -q debug -d2
 
 **Note**: I've made this file clean the build files each time it's ran.
 
+### Jamfile update
+
+I have also noticed that the game monkey directories referenced in the Jamfile located at `omni-bot/0.83/Omnibot` are incorrect. Open up the Jamfile, and change any reference to `dependencies/gamesrc_ex/...` to `dependencies/gmscriptex/gamesrc_ex`.
+
+### Compile omni-bot
+
 Now save the file and run the installer `./buildbot.sh` - if you need to make the file executable do the following prior to running `sudo chmod +x ./buildbot.sh`.
 
 Hopefully this should now compile and install omni-bot for you. This will also result in a file being created that we need to copy.
+
+### ETLegacy configuration
 
 `sudo cp ~/Downloads/omni-bot/0.83/Omnibot/build/ET/gcc-gnu-6.3.0/debug/omnibot_et.so ~/.etlegacy/legacy/omni-bot/`. This will copy the arm library so it can be detected by Enemy Territory.
 
