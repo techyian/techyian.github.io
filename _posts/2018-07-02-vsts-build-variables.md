@@ -6,7 +6,7 @@ description: Learn how to send user-defined variables to VSTS REST API when queu
 tags: [coding, c#, .net, asp.net]
 ---
 
-Whilst developing an ASP.NET Core app for building and releasing Xamarin projects via the VSTS REST API, I came across a problem when trying to pass variables to the build server. For reference, I was trying to call the v4.1 API, and specifically the Queue build API which can be seen [here](https://docs.microsoft.com/en-us/rest/api/vsts/build/builds/queue?view=vsts-rest-4.1). I needed to pass some user-defined variables to the build definition, and looking at the API docs, I could see an option to pass `parameters` in the Request Body which is defined as "The parameters for the build" and accepts a string; sounds fairly straightforward at first glimpse, but no matter what data assigned to the `parameters` argument I received a Bad Request (400) from the server. After hours of looking online, I came across this StackOverflow [post](https://stackoverflow.com/questions/34343084/start-a-build-and-passing-variables-through-vsts-rest-api) which mentions passing a JSON formatted string - this was slightly annoying as I'd tried previously to send a JSON object defined as a POCO but had no luck.
+Whilst developing an ASP.NET Core app for building and releasing Xamarin projects via the VSTS REST API, I came across a problem when trying to pass variables to the build server. For reference, I was trying to call the v4.1 API, and specifically the Queue build API which can be seen [here](https://docs.microsoft.com/en-us/rest/api/vsts/build/builds/queue?view=vsts-rest-4.1). I needed to pass some user-defined variables to the build definition, and looking at the API docs, I could see an option to pass `parameters` in the Request Body which is defined as "The parameters for the build" and accepts a string; sounds fairly straightforward at first glimpse, but no matter what data assigned to the `parameters` argument I received a Bad Request (400) from the server. After hours of looking online, I came across this StackOverflow [post](https://stackoverflow.com/questions/34343084/start-a-build-and-passing-variables-through-vsts-rest-api) which mentions passing a JSON formatted string - this was slightly annoying as I'd tried previously to send a POCO serialized as JSON but had no luck.
 
 Bingo!
 
@@ -16,7 +16,7 @@ The simplified controller endpoint:
 
 ```csharp
 [HttpPost]
-public async Task<IActionResult> BuildApp(string appRequestId, [FromBody] MobileAppRequestViewModel vm)
+public async Task<IActionResult> BuildApp(string appRequestId)
 {	
     var parameters = new Dictionary<string, string>
     {
@@ -29,7 +29,7 @@ public async Task<IActionResult> BuildApp(string appRequestId, [FromBody] Mobile
     var appRequest = new BuildMobileAppRequest
     {
         // Replace '1' with your definition id.
-        Definition = new Definitition(1),
+        Definition = new Definition(1),
         Parameters = json,
         Project = new AppProject("YOUR PROJECT ID"),
         // Replace '1' with your queue id.
@@ -37,7 +37,8 @@ public async Task<IActionResult> BuildApp(string appRequestId, [FromBody] Mobile
     };
 
     // Serialize "appRequest" and build your app using the VSTS API
-
+    var appRequestJson = JsonConvert.SerializeObject(appRequest);
+    
     return Ok();
 }
 ```
@@ -47,15 +48,15 @@ The POCOs to serialize:
 ```csharp
 public class BuildMobileAppRequest
 {
-    public Definitition Definition { get; set; }		
+    public Definition Definition { get; set; }		
     public string Parameters { get; set; }
 }
 
-public class Definitition
+public class Definition
 {
     public int Id { get; set; }
 
-    public Definitition(int id)
+    public Definition(int id)
     {
 	this.Id = id;
     }
