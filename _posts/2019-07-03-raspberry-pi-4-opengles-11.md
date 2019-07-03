@@ -15,4 +15,14 @@ Trying my already tested Pi 3B+ setup for ET: Legacy using full OpenGL works exa
 
 Regarding SDL2, it has long been discussed that in order to enable GLES support, you need to pass a number of flags to the configure command. As the Pi 4 now uses X11 as its window manager, this is no longer the case, simply call `./configure` and build/install as normal and you should be good to go!
 
+When running the game I get the following displayed in the console:
+
+```
+GL_VENDOR: Broadcom
+GL_RENDERER: V3D 4.2
+GL_VERSION: OpenGL ES-CM 1.1 Mesa 19.1.0-devel
+```
+
+Framerates are excellent in GLES, I've seen highs of 80 FPS which is amazing on such a small computer. The Pi Foundation really have surpassed all expectations and I'm very happy with my new Pi!
+
 Hope this helps someone.
