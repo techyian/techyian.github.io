@@ -29,12 +29,8 @@ public class OAuthController : Controller
     public IActionResult LinkVstsPage()
     {
         var token = _context.HttpContext.Session.Get<TokenModel>(Constants.TokenSessionKey);
+        ViewBag.Token = token;
         
-        if (token != null)
-        {
-            ViewBag.Token = token;
-        }
-
         return View("YourView", token != null);
     }
     
@@ -52,7 +48,7 @@ public class OAuthController : Controller
 
         if (sessionToken != null)
         {
-            error = PerformTokenRequest(GenerateRefreshPostData(sessionToken.RefreshToken), out sessionToken);
+            error = PerformTokenRequest(this.GenerateRefreshPostData(sessionToken.RefreshToken), out sessionToken);
             if (string.IsNullOrEmpty(error))
             {
                 token.Expiration = DateTime.Now.AddSeconds(int.Parse(sessionToken.ExpiresIn));
@@ -71,7 +67,7 @@ public class OAuthController : Controller
 
         if (!string.IsNullOrEmpty(code))
         {
-            error = PerformTokenRequest(GenerateRequestPostData(code), out token);
+            error = PerformTokenRequest(this.GenerateRequestPostData(code), out token);
             if (string.IsNullOrEmpty(error))
             {
                 token.Expiration = DateTime.Now.AddSeconds(int.Parse(token.ExpiresIn));
@@ -85,7 +81,7 @@ public class OAuthController : Controller
     
     public string GenerateAuthorizeUrl()
     {
-        UriBuilder uriBuilder = new UriBuilder(_storage.OAuthUrl);
+        var uriBuilder = new UriBuilder(_storage.OAuthUrl);
         var queryDictionary = QueryHelpers.ParseQuery(uriBuilder.Query);
         
         var items = queryDictionary.SelectMany(x => x.Value, (col, value) => new KeyValuePair<string, string>(col.Key, value)).ToList();
@@ -119,7 +115,7 @@ public class OAuthController : Controller
         );
     }
     
-    private string PerformTokenRequest(String postData, out TokenModel token)
+    private string PerformTokenRequest(string postData, out TokenModel token)
     {
         var error = string.Empty;
         var strResponseData = string.Empty;
@@ -205,7 +201,7 @@ public static class Constants
     public const string Local_TokenUrl = "Configuration:TokenUrl";
     public const string Local_Scope = "Configuration:Scope";
     
-    // Azure (delete if unnecessary for your workflow)
+    // Azure - add the following APPSETTINGS properties (delete if unnecessary for your workflow)
     public const string Azure_AuthUrl = "APPSETTING_AuthUrl";
     public const string Azure_CallbackUrl = "APPSETTING_CallbackUrl";
     public const string Azure_ClientAppId = "APPSETTING_ClientAppId";
@@ -218,7 +214,6 @@ public static class Constants
 ```
 public interface IStorageConfig
 {
-    
     string OAuthUrl { get; }
     string OAuthCallbackUrl { get; }
     string ClientAppId { get; }
@@ -387,7 +382,7 @@ Now that we have all the relevant code in place, we now need to associate your w
 
 1) **Application website** - The base url to your hosted web application
 1) **Authorization callback URL** - The base url followed by `/OAuth/Callback` (if you called your controller or endpoint something different, replace as appropriate).
-1) **Authorized scopes** - Select the following: Build (read and execute), Release (read, write and execute).
+1) **Authorized scopes** - Select the following: Build (read and execute), Release (read, write and execute). You are free to add additional scopes if your application requires them, these are just the ones I needed.
 
 Once complete, you should be presented with a summary of the information that you need to add into your `appconfiguration.json` file. The authorized scopes should be `vso.build_execute vso.release_execute`.
 
@@ -437,11 +432,6 @@ public class SourceCodeService : ISourceCodeService
     public async Task<ArtifactResponse> GetBuildArtifacts(string buildDef)
     {
         return await GetRequest<ArtifactResponse>($"{VstsUri}/{ProjectName}/_apis/build/builds/{buildDef}/artifacts?api-version=4.1");
-    }
-
-    public async Task<AppBuildResponse> PostBuildRequest(BuildMobileAppRequest request)
-    {
-        return await PostRequest<BuildMobileAppRequest, AppBuildResponse>($"{VstsUri}/{ProjectName}/_apis/build/builds?api-version=4.1", request);
     }
 
     private async Task<T> GetRequest<T>(string uri)
@@ -512,6 +502,9 @@ public class ProjectResponse
     public List<VstsProject> Value { get; set; }
     public int Count { get; set; }
 }
+```
+
+```
 
 public class VstsProject
 {
@@ -521,13 +514,108 @@ public class VstsProject
     public string Description { get; set; }
     public List<VstsCollection> Collection { get; set; }
 }
+```
 
+```
 public class VstsCollection
 {
     public string Id { get; set; }
     public string Name { get; set; }
     public string Url { get; set; }
     public string CollectionUrl { get; set; }
+}
+```
+
+```
+public class ArtifactResponse
+{
+    public int Count { get; set; }
+    public List<Artifact> Value { get; set; }
+}
+```
+
+```
+public class Artifact
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ArtifactResource Resource { get; set; }
+}
+```
+
+```
+public class ArtifactResource
+{
+    public string Type { get; set; }
+    public string Data { get; set; }
+    public string Url { get; set; }
+    public string DownloadUrl { get; set; }
+}
+```
+
+```
+public class AppBuildResponse
+{
+    public int Id { get; set; }
+    public string BuildNumber { get; set; }
+    public string Status { get; set; }
+    public DateTime QueueTime { get; set; }
+    public string Url { get; set; }
+    public BuildDefinition Definition { get; set; }
+    public int BuildNumberRevision { get; set; }
+}
+```
+
+```
+public class BuildDefinitionList
+{
+    public int Count { get; set; }
+    public List<BuildDefinition> Value { get; set; }
+}
+```
+
+```
+public class BuildDefinition
+{
+    public string Name { get; set; }
+    public string Url { get; set; }
+    public string Uri { get; set; }
+    public string Path { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public string BuildNumber { get; set; }
+    public int BuildNumberRevision { get; set; }
+    public bool Deleted { get; set; }
+    public string DeletedDate { get; set; }
+    public string DeletedReason { get; set; }
+    public string FinishTime { get; set; }
+    public int Id { get; set; }
+    public bool KeepForever { get; set; }
+    public string Parameters { get; set; }
+    public Project Project { get; set; }
+    public BuildQueue Queue { get; set; }
+}
+```
+
+```
+public class BuildQueue
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Url { get; set; }
+}
+```
+
+```
+public class Project
+{
+    public string Abbreviation { get; set; }
+    public string Description { get; set; }
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public string Revision { get; set; }
+    public string State { get; set; }
+    public string Url { get; set; }
+    public string Visibility { get; set; }
 }
 ```
 
