@@ -14,11 +14,11 @@ baseurl: ""
 # Of course don't forget to change the username and projectname to YOUR username and project
 
 # Name of website
-title: Ian Auty - Coding, Photography and Making
+title: Ian Auty - Coding, Making and Raspberry Pi
 short-title: Ian Auty
 
 # Short description of your site
-description: Ian Auty is a Software Developer interested in the Raspberry Pi, Photography and making cool things. Always learning and helping along the way.
+description: Ian Auty is a Software Developer interested in C#, Raspberry Pi, and making cool things. Every day is a school day.
 
 # --- Navigation bar options --- #
 
