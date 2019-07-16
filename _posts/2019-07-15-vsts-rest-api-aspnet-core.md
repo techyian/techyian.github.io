@@ -12,7 +12,7 @@ Authentication with VSTS involves linking a web project with VSTS and subsequent
 
 ### The code and UI
 
-To begin, we will add a new controller to your web application called `OAuthController`:
+To begin, we will add a new controller to your web application called `OAuthController`. Add a NuGet reference to `Microsoft.AspNetCore.WebUtilities` and add the code below:
 
 ```
 public class OAuthController : Controller
@@ -165,9 +165,9 @@ public class OAuthController : Controller
 
 ```
 
-**Note:** In this controller for the purposes of simplicity, we are storing the token data to the session state - in a real web application, the tokens should be stored in the database.
+**Note:** In this controller for the purposes of simplicity, we are storing the token data to the session state - in a real web application, the tokens should be stored in the database. The supporting classes of this controller are documented below:
 
-The supporting classes of this controller are documented below:
+`TokenModel` represents a model object of the format in which token data is returned to you by VSTS.
 
 ```
 public class TokenModel
@@ -187,6 +187,8 @@ public class TokenModel
     public DateTime Expiration { get; set; }
 }
 ```
+
+Add some constant strings to define configuration properties.
 
 ```
 public static class Constants
@@ -210,6 +212,8 @@ public static class Constants
     public const string Azure_Scope = "APPSETTING_Scope";
 }
 ```
+
+The below class `StorageConfig` allows you to access the configuration values in your `appsettings.json` file, or if your pipeline uses it, access values from Azure too.
 
 ```
 public interface IStorageConfig
@@ -313,6 +317,25 @@ public class StorageConfig : IStorageConfig
 }
 ```
 
+Add a new static class called `SessionExtensions`, this will provide helper methods `Get` and `Set` to help (de)serialize objects to Json.
+
+```
+public static class SessionExtensions
+{
+    public static void Set<T>(this ISession session, string key, T value)
+    {
+        session.SetString(key, JsonConvert.SerializeObject(value));
+    }
+
+    public static T Get<T>(this ISession session, string key)
+    {
+        var value = session.GetString(key);
+        return value == null ? default(T) :
+            JsonConvert.DeserializeObject<T>(value);
+    }
+}
+```
+
 Your `appsettings.json` file will need to include the relevant configuration properties and we will fill these in shortly:
 
 ```
@@ -328,7 +351,7 @@ Your `appsettings.json` file will need to include the relevant configuration pro
 }
 ```
 
-Finally, you will need a View to support your controller and a very basic example can be found below (add a reference to the `TokenModel` object in your view):
+Finally, you will need a View to support your controller and a very basic example can be found below (add a reference to the `TokenModel` object in your view). This view uses Bootstrap 4 CSS classes:
 
 ```
 @model bool
@@ -395,7 +418,6 @@ public interface ISourceCodeService
 {
     Task<ProjectResponse> GetProjects();
     Task<BuildDefinitionList> GetBuildDefinitions();
-    Task<AppBuildResponse> PostBuildRequest(BuildMobileAppRequest request);
     Task<ArtifactResponse> GetBuildArtifacts(string buildDef);
 }
 ```
@@ -459,6 +481,7 @@ public class SourceCodeService : ISourceCodeService
         catch (Exception ex)
         {
             // Log your exception accordingly.
+            throw;
         }
     }
 
@@ -489,6 +512,7 @@ public class SourceCodeService : ISourceCodeService
         catch (Exception ex)
         {
             // Log your exception accordingly.
+            throw;
         }
     }
 }
