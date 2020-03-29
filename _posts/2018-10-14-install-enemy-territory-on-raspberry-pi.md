@@ -7,7 +7,7 @@ description: Learn how install Enemy Territory Legacy on a Raspberry Pi.
 tags: [gaming, raspberry-pi]
 ---
 
-**Updated March 2020:** Updated dependency list, use latest boost library, remove bjam references, prefer bundled SDL, add Pi 4 instructions.
+**Updated March 2020:** Updated dependency list, use latest boost library, remove bjam references, prefer bundled SDL, add Pi 4 instructions, update omni-bot binary.
 
 Ever since it was first released on PC, I have been a huge fan of Wolfenstein: Enemy Territory; it's broad community and excellent graphics for the era drew many players online to gain as much XP as possible, and get rewarded with the duel Akimbo pistols. Being a 15 year old game, the online community has taken a hit and unfortunately many servers are now kept alive with bots, however things could soon change.
 
