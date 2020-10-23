@@ -8,13 +8,13 @@ tags: [coding, c#, .net, aspnetcore]
 
 ### Intro
 
-When designing a new web application, breadcrumbs regretably tend to be one of the last things I think about. Depending on where your interests lie, you can find yourself concentrating more on the back-end of your application rather than the usability but it's important to remember that usability is key to its uptake and continued use.
+When designing a new web application, breadcrumbs regrettably tend to be one of the last things I think about. Depending on where your interests lie, you can find yourself concentrating more on the back-end of your application rather than the usability but it's important to remember that usability is key to its uptake and continued use.
 
-I was recently asked to implement breadcrumbs in a new ASP.NET Core web application and looked for a quick solution on StackOverflow. A NuGet package called SmartBreadcrumbs was mentioned quite a bit but I was hoping for a more simple solution. Unfortunately I didn't find anything concrete on the topic so began implementing my own super simple breadcrumb system using an `ActionFilterAttribute` and the ASP.NET `ViewBag`.
+I was recently asked to implement breadcrumbs in a new ASP.NET Core web application and looked for a quick solution on StackOverflow. A NuGet package called SmartBreadcrumbs was mentioned quite a bit but I was hoping for a more simple solution. Unfortunately, I didn't find anything concrete on the topic so began implementing my own super simple breadcrumb system using an `ActionFilterAttribute` and the ASP.NET `ViewBag`.
 
 ### The code
 
-The logic behind this system was to make use of the `OnActionExecuted` override and use the `HttpContext.Request.Path` value to configure the breadcrumb entries. I began by creating a new Action Filter called `BreadcrumbActionFilter` which extends the `ActionFilterAttribute` abstract class and overrided the `OnActionExecuted` method.
+The logic behind this system was to make use of the `OnActionExecuted` override and use the `HttpContext.Request.Path` value to configure the breadcrumb entries. I began by creating a new Action Filter called `BreadcrumbActionFilter` which extends the `ActionFilterAttribute` abstract class and overrides the `OnActionExecuted` method.
 
 ```csharp
 public class BreadcrumbActionFilter : ActionFilterAttribute
@@ -131,7 +131,7 @@ private List<Breadcrumb> ConfigureBreadcrumb(ActionExecutedContext context)
 
 Above is the main method which will be used to configure your breadcrumb trail. You can see here that we're first adding an initial entry to our list of breadcrumbs which is the "Home Page". 
 
-The next stage of the process is to determine if the request's path has a value and if so, we want to extract each part of that path so we can build up our trail. On each iteration of the path members, we want to determine if that member is the name of a MVC Controller class and it has a default Index endpoint (a controller with an Index endpoint can be accessed by using the controller's name in a URL without explicitly having to reference the Index endpoint).
+The next stage of the process is to determine if the request's path has a value, and if so, we want to extract each part of that path so we can build up our trail. On each iteration of the path members, we want to determine if that member is the name of a MVC Controller class and it has a default Index endpoint (a controller with an Index endpoint can be accessed by using the controller's name in a URL without explicitly having to reference the Index endpoint).
 
 If the path member we're processing isn't the name of a controller class, we want to determine if it is the name of an endpoint on the previous path member - if it is, it gets added to the breadcrumb trail.
 
