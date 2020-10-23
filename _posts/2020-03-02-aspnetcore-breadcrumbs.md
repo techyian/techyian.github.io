@@ -46,30 +46,26 @@ A typical website will feature a "Home Page" which will be used as a starting pa
 private List<Breadcrumb> ConfigureBreadcrumb(ActionExecutedContext context)
 {
     var breadcrumbList = new List<Breadcrumb>();
+    var homeControllerName = "Home";
 
     breadcrumbList.Add(new Breadcrumb
     {
         Text = "Home",
         Action = "Index",
-        Controller = "Portal", // Change this controller name to match your Home Controller.
+        Controller = homeControllerName, // Change this controller name to match your Home Controller.
         Active = true
     });
-    
+
     if (context.HttpContext.Request.Path.HasValue)
     {
         var pathSplit = context.HttpContext.Request.Path.Value.Split("/");
 
         for (var i = 0; i < pathSplit.Length; i++)
         {
-            if (string.IsNullOrEmpty(pathSplit[i]))
+            // Check if first element is equal to our Index (home) page.
+            if (string.IsNullOrEmpty(pathSplit[i]) || string.Compare(pathSplit[i], homeControllerName, true) == 0)
             {
                 continue;
-            }
-
-            // Check if first element is equal to our Index (portal) page.
-            if (string.Compare(pathSplit[i], "Portal", true) == 0)
-            {
-                break;
             }
 
             // First check if path is a Controller class.
@@ -125,11 +121,12 @@ private List<Breadcrumb> ConfigureBreadcrumb(ActionExecutedContext context)
             }
         }
     }
-    
+
     // There will always be at least 1 entry in the breadcrumb list. The last element should always be disabled.
     breadcrumbList.LastOrDefault().Active = false;
 
     return breadcrumbList;
+}
 ```
 
 Above is the main method which will be used to configure your breadcrumb trail. You can see here that we're first adding an initial entry to our list of breadcrumbs which is the "Home Page". 
@@ -176,6 +173,16 @@ public class Breadcrumb
     public string Action { get; set; }
     public string Controller { get; set; }
     public bool Active { get; set; }
+
+    public Breadcrumb() { }
+
+    public Breadcrumb(string text, string action, string controller, bool active)
+    {
+        this.Text = text;
+        this.Action = action;
+        this.Controller = controller;
+        this.Active = active;
+    }
 }
 ```
 
@@ -211,6 +218,9 @@ The last stage of the process is to implement the client side changes necessary 
 }
 ```
 
+### GitHub Repository
+
+I've uploaded an example ASP.NET Core web application to [GitHub](https://github.com/techyian/SuperSimpleBreadcrumbs) which shows how the breadcrumbs function in practice; there is also an example of how you can override the breadcrumbs in a Razor view.
 
 ### Conclusion
 
